@@ -12,13 +12,20 @@ pipeline {
                     sh 'mvn clean install -DskipTests'
                 }
             }
-        } 
+        }  
+        stage("Unit-test") {
+            steps {
+                script{
+                     sh "unit test case"
+                }
+            }
+        }
         stage("snyk") {
             steps {
                 script{
                     snykSecurity failOnIssues: false, snykInstallation: 'snyk', snykTokenId: 'snyk-token'
                 }
             }
-        }   
+        } 
     }
 }
