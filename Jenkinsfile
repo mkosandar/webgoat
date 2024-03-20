@@ -32,7 +32,8 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -dit ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git
+                    docker run -dit ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git > output.txt
+                    cat output.txt |grep -oE “\”stringsFound\”\:.[.\”]}”|sed -e “s/,\”.]//” -e “s/}//”|sed “s/\”stringsFound\”://”|grep -o “\”.\””|awk -F “,” ‘{ for(i=1;i<=NF;i++) print $i}’
                     """
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
