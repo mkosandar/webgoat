@@ -37,10 +37,10 @@ pipeline {
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
                     docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside('--entrypoint=""') {
-                        sh "trufflehog git --help"
-                        sh "trufflehog github --help"
-                        sh "trufflehog github https://github.com/mkosandar/webgoat.git"
-                        sh "trufflehog git https://github.com/mkosandar/webgoat.git"
+                        //sh "trufflehog git --help"
+                        //sh "trufflehog github --help"
+                        sh "trufflehog git --repo=https://github.com/mkosandar/webgoat.git"
+                        //sh "trufflehog git https://github.com/mkosandar/webgoat.git"
                     }
                 }
             }
