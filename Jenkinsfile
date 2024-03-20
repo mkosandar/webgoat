@@ -34,6 +34,7 @@ pipeline {
                     sh """
                     docker run -dit --name trufflehog-container ghcr.io/trufflesecurity/trufflehog:latest
                     docker exec trufflehog-container trufflehog git https://github.com/mkosandar/webgoat.git
+                    """
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
                     //docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside {
