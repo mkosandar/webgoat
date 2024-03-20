@@ -31,7 +31,7 @@ pipeline {
         stage('Secret Detection') {
             steps {
                 script {
-                    docker.image('trufflesecurity/trufflehog').inside {
+                    docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside {
                         sh 'trufflehog git https://github.com/mkosandar/webgoat.git'
                     }
                 }
