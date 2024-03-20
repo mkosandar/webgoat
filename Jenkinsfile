@@ -31,13 +31,13 @@ pipeline {
         stage('Secret Detection') {
             steps {
                 script {
-                    sh """
-                    docker run -it ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git > output.txt
-                    """
+                    //sh """
+                    //docker run -it ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git > output.txt
+                    //"""
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
-                    //docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside {
-                        //    sh 'trufflehog git https://github.com/mkosandar/webgoat.git'
+                    docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside('--entrypoint=""') {
+                            sh 'trufflehog git https://github.com/mkosandar/webgoat.git'
                     }
                 }
             }
