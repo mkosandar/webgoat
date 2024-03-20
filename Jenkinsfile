@@ -28,12 +28,14 @@ pipeline {
                 }
             }
         } 
-        stage("docker") {
+        stage('Secret Detection') {
             steps {
-                script{
-                    sh "docker ps"
+                script {
+                    docker.image('trufflesecurity/trufflehog').inside {
+                        sh 'trufflehog git https://github.com/mkosandar/webgoat.git'
+                    }
                 }
             }
-        } 
+        }
     }
 }
