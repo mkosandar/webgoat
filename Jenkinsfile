@@ -4,6 +4,7 @@ pipeline {
         //gradle "7.4.2"
         //jdk "JDK15"
         maven "mvn 3.9.6"
+        dockerTool "docker"
     }
     stages {
         stage("Build") {
@@ -24,6 +25,13 @@ pipeline {
             steps {
                 script{
                     snykSecurity failOnIssues: false, snykInstallation: 'snyk', snykTokenId: 'snyk-token'
+                }
+            }
+        } 
+        stage("docker") {
+            steps {
+                script{
+                    sh "docker ps"
                 }
             }
         } 
