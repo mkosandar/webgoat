@@ -33,7 +33,6 @@ pipeline {
                 script {
                     sh """
                     docker run -it ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git > output.txt
-                    cat output.txt 
                     """
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
