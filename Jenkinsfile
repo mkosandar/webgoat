@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -dit --name trufflehog-container ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git
+                    docker run -dit ghcr.io/trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git
                     """
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
