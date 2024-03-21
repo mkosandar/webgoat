@@ -49,6 +49,7 @@ pipeline {
             steps {
                 script{
                     sh """
+                    docker rm -f webgoat
                     docker build -t webgoat:1.0 .
                     docker run -dit -p 9090:8080 --name webgoat webgoat:1.0 
                     //sshPublisher(publishers: [sshPublisherDesc(configName: '', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'startup.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'opt/tomcat/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'file-name')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
