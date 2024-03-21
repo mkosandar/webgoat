@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -v $(pwd):/src --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json
+                    docker run -v \$(pwd):/src --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json
                     """
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
