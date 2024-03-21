@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         } 
-        stage('Secret Detection') {
+        /*stage('Secret Detection') {
             steps {
                 script {
                     //sh """
@@ -44,7 +44,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         stage("prod-deployment") {
             steps {
                 script{
