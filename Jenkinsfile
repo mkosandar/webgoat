@@ -51,7 +51,7 @@ pipeline {
                 script{
                     sh """
                     docker rm -f webgoat
-                    docker build -t mayureshkosandar/webgoat:1.o .
+                    docker build -t mayureshkosandar/webgoat:1.0 .
                     docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
                     docker push mayureshkosandar/webgoat:1.0
                     docker run -dit -p 9090:8080 --name webgoat webgoat:1.0 
