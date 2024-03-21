@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     //sh """
-                    docker run -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/mkosandar/webgoat.git
+                    docker run -it -v \"$PWD:/pwd\" trufflesecurity/trufflehog:latest github --repo https://github.com/mkosandar/webgoat.git
                     //"""
                     //docker.image('dxa4481/trufflehog').inside {
                     //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
