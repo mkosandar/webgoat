@@ -17,7 +17,7 @@ pipeline {
         stage("Unit-test") {
             steps {
                 script{
-                     echo "unit test case"
+                     echo "mvn test" 
                 }
             }
         }
