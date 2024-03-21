@@ -39,7 +39,7 @@ pipeline {
                     docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside('--entrypoint=""') {
                         //sh "trufflehog git --help"
                         //sh "trufflehog github --help"
-                        sh "trufflehog --entropy=NO --regex https://github.com/mkosandar/webgoat.git"
+                        sh "trufflehog git --entropy=NO --regex https://github.com/mkosandar/webgoat.git"
                         //sh "trufflehog git https://github.com/mkosandar/webgoat.git"
                     }
                 }
