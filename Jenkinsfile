@@ -61,8 +61,10 @@ pipeline {
             steps {
                 script{
                     docker.image('alpine:latest').inside('--entrypoint=""') {
+                        sh"""
                         apt-get update && apt-get install -y openssh-client
                         ssh mk@192.168.92.114
+                        """
                     }                    
                     //sh """
                     //docker rm -f webgoat
