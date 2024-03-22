@@ -60,10 +60,14 @@ pipeline {
         stage("prod-deployment") {
             steps {
                 script{
-                    sh """
-                    docker rm -f webgoat
-                    docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0 
-                    """
+                    docker.image('alpine:latest').inside('--entrypoint=""') {
+                        apt-get update && apt-get install -y openssh-client
+                        ssh mk@192.168.92.114
+                    }                    
+                    //sh """
+                    //docker rm -f webgoat
+                    //docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0 
+                    //"""
                 }
             }
         }
