@@ -60,7 +60,7 @@ pipeline {
         stage("prod-deployment") {
             steps {
                 script{
-                    docker.image('alpine:latest').inside('--entrypoint=""') {
+                    docker.image('alpine:latest').inside('--entrypoint=""','-u root') {
                         sh"""
                         apk update
                         apk add --no-cache openssh-client
