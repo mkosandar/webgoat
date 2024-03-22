@@ -62,8 +62,10 @@ pipeline {
                 script{
                     docker.image('alpine:latest').inside('--entrypoint=""') {
                         sh"""
-                        apt-get update && apt-get install -y openssh-client
+                        apt-get update -y
+                        apt-get install -y openssh-client
                         ssh mk@192.168.92.114
+                        
                         """
                     }                    
                     //sh """
