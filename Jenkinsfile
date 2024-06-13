@@ -10,13 +10,13 @@ pipeline {
     DOCKERHUB_CREDENTIALS= credentials('dockerHub-login')
     }
     stages {
-        /*stage("Build") {
+        stage("Build") {
             steps {
                 script{
                     sh 'mvn clean install -DskipTests'
                 }
             }
-        }  
+        }/*  
         stage("Unit-test") {
             steps {
                 script{
