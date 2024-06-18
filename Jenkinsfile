@@ -45,7 +45,7 @@ pipeline {
                     //}
                 }
             }
-        }
+        }/*
         stage("docker-publish") {
             steps {
                 script{
@@ -56,7 +56,7 @@ pipeline {
                     """
                 }
             }
-        }        
+        }*/        
         stage("prod-deployment") {
             steps {
                 script{
