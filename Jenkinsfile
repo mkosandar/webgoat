@@ -65,7 +65,7 @@ pipeline {
                         apk update
                         apk add --no-cache openssh-client
                         apk add sshpass
-                        sshpass -p \"mk\" ssh mk@192.168.92.114
+                        sshpass -p mk ssh -tt mk@192.168.92.114
                         //ssh mk@192.168.92.114
                         
                         """
