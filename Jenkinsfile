@@ -16,7 +16,7 @@ pipeline {
                     sh 'mvn clean install -DskipTests'
                 }
             }
-        } 
+        }/* 
         stage("Unit-test") {
             steps {
                 script{
@@ -45,7 +45,7 @@ pipeline {
                     //}
                 }
             }
-        }/*
+        }
         stage("docker-publish") {
             steps {
                 script{
