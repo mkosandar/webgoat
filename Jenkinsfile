@@ -56,8 +56,28 @@ pipeline {
                     """
                 }
             }
-        }*/        
-        stage("prod-deployment") {
+        }*/       
+        stage('prod-deployment') {
+            agent {
+                docker {
+                    image 'alpine:latest'
+                    // Run the container on the node specified at the
+                    // top-level of the Pipeline, in the same workspace,
+                    // rather than on a new node entirely:
+                    //reuseNode true
+                }
+            }
+            steps {
+                sh """
+                apk update
+                apk add --no-cache openssh-client
+                apk add sshpass
+                sshpass -p mk ssh -tt mk@192.168.92.114
+                docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
+                """
+            }
+        }
+        /*stage("prod-deployment") {
             steps {
                 script{
                     docker.image('alpine:latest').inside('-u root') {
@@ -75,6 +95,6 @@ pipeline {
                     //"""
                 }
             }
-        }
+        }*/
     }
 }
