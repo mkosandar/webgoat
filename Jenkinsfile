@@ -66,6 +66,7 @@ pipeline {
                         apk add --no-cache openssh-client
                         apk add sshpass
                         sshpass -p mk ssh -tt mk@192.168.92.114
+                        docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
                         //ssh mk@192.168.92.114
                         
                         """
