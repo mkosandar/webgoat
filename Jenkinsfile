@@ -80,7 +80,7 @@ pipeline {
         stage("prod-deployment") {
             steps {
                 script{
-                    docker.image('mayureshkosandar/alpine:latest').inside() {
+                    docker.image('mayureshkosandar/alpine:latest').inside('-u root') {
                         sh"""
                         apk update
                         apk add --no-cache openssh-client
