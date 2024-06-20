@@ -84,7 +84,7 @@ pipeline {
                         sh"""
                         apk update
                         apk add --no-cache openssh-client
-                        ssh -i $hostkey mk@192.168.92.114
+                        ssh -i ${hostkey} mk@192.168.92.114
                         docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
                         """
                     }
