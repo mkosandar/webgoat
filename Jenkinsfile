@@ -85,8 +85,7 @@ pipeline {
                         sh"""
                         apk update
                         apk add --no-cache openssh-client
-                        echo ${mkpublic}
-                        echo ${mkpublic} >> /root/.ssh/known_hosts
+                        //echo ${mkpublic} >> /root/.ssh/known_hosts
                         ssh -i ${sshUserPrivateKey} -tt mk@192.168.92.114
                         docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
                         """
