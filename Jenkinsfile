@@ -9,7 +9,7 @@ pipeline {
     environment {     
     DOCKERHUB_CREDENTIALS= credentials('dockerHub-login')
     sshUserPrivateKey= credentials('mk-server')
-    Secret = credentials('mk-public')
+    Secret = credentials('mkpublic')
     }
     stages {
         stage("Build") {
