@@ -86,8 +86,7 @@ pipeline {
                         sh"""
                         apk update
                         apk add --no-cache openssh-client
-                        echo $mk_key
-                        echo "$mk_key" > /tmp/private_key.pem
+                        echo $mk_key > /tmp/private_key.pem
                         chmod 600 /tmp/private_key.pem
                         ssh -i /tmp/private_key.pem mk@192.168.92.114
                         docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
