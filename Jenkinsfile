@@ -9,7 +9,7 @@ pipeline {
     environment {     
     DOCKERHUB_CREDENTIALS= credentials('dockerHub-login')
     PRIVATE_KEY= credentials('mk-server')
-    Host-key= credentials('host-key')
+    Host_key= credentials('host-key')
     }
     stages {
         stage("Build") {
@@ -86,7 +86,7 @@ pipeline {
                         sh"""
                         apk update
                         apk add --no-cache openssh-client
-                        echo $host-key
+                        echo $Host_key
                         ssh -v -i "$PRIVATE_KEY" mk@192.168.92.114
                         docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
                         """
