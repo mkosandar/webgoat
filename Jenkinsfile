@@ -68,6 +68,7 @@ pipeline {
                     // rather than on a new node entirely:
                     //reuseNode true
                 }
+            }
             steps {
                 sh """
                 apk update
@@ -78,7 +79,6 @@ pipeline {
                 docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
                 """
                 }
-            }
         }/*
         stage("prod-deployment") {
             steps {
