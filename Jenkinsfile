@@ -81,7 +81,7 @@ pipeline {
         stage("prod-deployment") {
             steps {
                 script{
-                    docker.image('alpine:latest').inside('-u root -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent'') {
+                    docker.image('alpine:latest').inside('-u root -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent') {
                         sh """
                         apk update
                         apk add --no-cache openssh-client
