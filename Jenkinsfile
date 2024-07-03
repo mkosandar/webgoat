@@ -81,16 +81,12 @@ pipeline {
         stage("prod-deployment") {
             steps {
                 script{
-                    docker.image('alpine:latest').inside('-u root') {
+                    docker.image('alpine:latest').inside('-u root -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent'') {
                         sh """
                         apk update
                         apk add --no-cache openssh-client
-                        sshagent(['mk_server']) {
-                        sh """
-                        ssh -o StrictHostKeyChecking=no mk@192.168.92.114
+                        ssh -T mk@192.168.92.114
                         docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
-                        """
-                        }
                         """
                     }
                     //sh """
