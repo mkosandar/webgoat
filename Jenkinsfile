@@ -68,7 +68,6 @@ pipeline {
                     // rather than on a new node entirely:
                     //reuseNode true
                 }
-            }
             steps {
                 sh """
                 apk update
