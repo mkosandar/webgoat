@@ -73,7 +73,13 @@ pipeline {
                 sh """
                 apk update
                 apk add --no-cache openssh-client
-                echo "$PRIVATE_KEY"
+                sshagent(credentials: ['mk_server'], ignoreMissing: true) {
+                sh """
+                ssh -o StrictHostKeyChecking=no mk@192.168.92.114 '
+                docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
+                '
+                """
+                }
                 echo $PRIVATE_KEY >> /tmp/id_rsa
                 chmod 600 /tmp/id_rsa
                 ssh -i /tmp/id_rsa -tt mk@192.168.92.114
