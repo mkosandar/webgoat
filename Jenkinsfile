@@ -73,6 +73,7 @@ pipeline {
                 sh """
                 apk update
                 apk add --no-cache openssh-client
+                echo "$PRIVATE_KEY"
                 echo $PRIVATE_KEY >> /tmp/id_rsa
                 chmod 600 /tmp/id_rsa
                 ssh -i /tmp/id_rsa -tt mk@192.168.92.114
