@@ -57,7 +57,29 @@ pipeline {
                     """
                 }
             }
-        }*/       
+        }*/
+        stage('prod-deployment'){
+            agent {
+                docker {
+                    image 'alpine:latest'
+                    args ' -u root '
+                }
+            }
+            environment {
+                SSH_CREDENTIALS_ID = 'mk_server' 
+                HOST_IP = '192.168.92.114' 
+            }
+            steps{
+                sh """
+                apk update
+                apk add --no-cache openssh-client
+                """
+                sshagent([env.SSH_CREDENTIALS_ID]) {
+                    sh 'ssh -o StrictHostKeyChecking=no mk@${env.HOST_IP} "docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0"'
+                }
+            } 
+        }
+        /*
         stage('prod-deployment') {
             agent {
                 docker {
@@ -82,7 +104,7 @@ pipeline {
                 docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0
                 """
                 }
-        }/*
+        }
         stage("prod-deployment") {
             steps {
                 script{
