@@ -77,6 +77,10 @@ pipeline {
                 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
                 """
                 sshagent([env.SSH_CREDENTIALS_ID]) {
+                    sh"""
+                    unset SSH_AUTH_SOCK;
+                    unset SSH_AGENT_PID;
+                    """
                     sh 'ssh -o StrictHostKeyChecking=no mk@${env.HOST_IP} "docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0"'
                 }
             } 
