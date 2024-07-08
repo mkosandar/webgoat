@@ -80,8 +80,8 @@ pipeline {
                     sh"""
                     unset SSH_AUTH_SOCK;
                     unset SSH_AGENT_PID;
+                    ssh -o StrictHostKeyChecking=no mk@${env.HOST_IP} "docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0"
                     """
-                    sh 'ssh -o StrictHostKeyChecking=no mk@${env.HOST_IP} "docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0"'
                 }
             } 
         }
