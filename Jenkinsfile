@@ -73,6 +73,8 @@ pipeline {
                 sh """
                 apk update
                 apk add --no-cache openssh-client
+                ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -P ""
+                cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
                 """
                 sshagent([env.SSH_CREDENTIALS_ID]) {
                     sh 'ssh -o StrictHostKeyChecking=no mk@${env.HOST_IP} "docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0"'
