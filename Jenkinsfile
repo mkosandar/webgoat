@@ -58,6 +58,16 @@ pipeline {
                 }
             }
         }*/
+        stage('OWASP Dependency-Check Vulnerabilities') {
+            steps {
+                dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
+    }
         stage("deploy-to-devsecops") {
             steps {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'devsecops', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "docker rm -f webgoat; docker run -dit -p 9988:8080 --name webgoat mayureshkosandar/webgoat:1.0 ", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
