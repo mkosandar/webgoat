@@ -62,7 +62,6 @@ pipeline {
             steps {
                 script{
                     sh """
-                    docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
                     sshPublisher(publishers: [sshPublisherDesc(configName: 'devsecops', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker run -dit -p 9090:8080 --name webgoat mayureshkosandar/webgoat:1.0', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     """
                 }
