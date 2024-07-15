@@ -8,7 +8,6 @@ pipeline {
     }
     environment {     
     DOCKERHUB_CREDENTIALS= credentials('dockerHub-login')
-    CVSS_THRESHOLD = '5.0'
     PRIVATE_KEY= credentials('mk_server')
     }
     stages {
