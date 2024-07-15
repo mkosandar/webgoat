@@ -73,7 +73,7 @@ pipeline {
                     -s './'
                     -f 'ALL' 
                     --prettyPrint''', odcInstallation: 'DependencyCheck'
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                dependencyCheckPublisher failedNewCritical: 5, failedTotalCritical: 5, pattern: 'dependency-check-report.xml'
       }
     }
         stage("deploy-to-devsecops") {
