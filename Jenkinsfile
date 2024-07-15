@@ -32,6 +32,13 @@ pipeline {
                 }
             }
         } 
+        stage("Checkmarx") {
+            steps {
+                script{
+                    checkmarxASTScanner additionalOptions: '', baseAuthUrl: '', branchName: '', checkmarxInstallation: 'Checkmarx', credentialsId: '', projectName: '${env.JOB_NAME}', serverUrl: '', tenantName: ''
+                }
+            }
+        }
         stage('Secret Detection') {
             steps {
                 script {
