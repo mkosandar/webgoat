@@ -67,7 +67,7 @@ pipeline {
         }
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
-                dependencyCheck additionalArguments: ''' 
+                dependencyCheck additionalArguments: '--failOnCVSS 5'' 
                     -o './'
                     -s './'
                     -f 'ALL' 
