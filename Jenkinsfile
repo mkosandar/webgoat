@@ -43,14 +43,12 @@ pipeline {
             steps {
                 script {
                     sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
-                    //docker.image('dxa4481/trufflehog').inside {
-                    //    sh 'trufflehog --regex https://github.com/mkosandar/webgoat.git'
-                    //docker.image('ghcr.io/trufflesecurity/trufflehog:latest').inside('--entrypoint=""') {
-                        //sh "trufflehog git --help"
-                        //sh "trufflehog github --help"
-                        //sh "trufflehog --entropy=NO --regex https://github.com/mkosandar/webgoat"
-                        //sh "trufflehog https://github.com/mkosandar/webgoat"
-                    //}
+                    def report =readFile('trufflehog-report.json')
+                    if (report.contains('"found": true')) {
+                        error "TruffleHog found secrets in the repository. Failing the build."
+                    } else {
+                        echo "No secrets found by TruffleHog."
+                    }
                 }
             }
         }
