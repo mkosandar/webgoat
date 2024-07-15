@@ -17,7 +17,7 @@ pipeline {
                     sh 'mvn clean install -DskipTests'
                 }
             }
-        }/* 
+        }
         stage("Unit-test") {
             steps {
                 script{
@@ -57,7 +57,7 @@ pipeline {
                     """
                 }
             }
-        }*/
+        }
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
                 dependencyCheck additionalArguments: ''' 
