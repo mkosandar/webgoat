@@ -8,6 +8,7 @@ pipeline {
     }
     environment {     
     DOCKERHUB_CREDENTIALS= credentials('dockerHub-login')
+    CVSS_THRESHOLD = '5.0'
     PRIVATE_KEY= credentials('mk_server')
     }
     stages {
@@ -67,7 +68,7 @@ pipeline {
         }
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
-                dependencyCheck additionalArguments: '--failOnCVSS 5'' 
+                dependencyCheck additionalArguments: " --failOnCVSS ${CVSS_THRESHOLD}"' 
                     -o './'
                     -s './'
                     -f 'ALL' 
