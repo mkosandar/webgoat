@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
-                    def report =readFile('trufflehog-report.json')
+                    def report =readFile('trufflehog-output.json')
                     if (report.contains('"found": true')) {
                         error "TruffleHog found secrets in the repository. Failing the build."
                     } else {
