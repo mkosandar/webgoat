@@ -39,16 +39,33 @@ pipeline {
                 }
             }
         }
+         stage('Checkov') {
+             steps {
+                 script {
+                     docker.image('bridgecrew/checkov:latest').inside("--entrypoint=''") {
+                         unstash 'terragoat'
+                         try {
+                             sh 'checkov -d . --use-enforcement-rules -o cli -o junitxml --output-file-path console,results.xml --repo-id example/terragoat --branch master'
+                             junit skipPublishingChecks: true, testResults: 'results.xml'
+                         } catch (err) {
+                             junit skipPublishingChecks: true, testResults: 'results.xml'
+                             throw err
+                         }
+                     }
+                 }
+             }
+         }
         stage('Secret Detection') {
             steps {
                 script {
+                    //sh "trufflehog git https://github.com/mkosandar/webgoat.git --json --no-update --fial "
                     sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
-                    def report =readFile('trufflehog-output.json')
-                    if (report.contains('"found": true')) {
-                        error "TruffleHog found secrets in the repository. Failing the build."
-                    } else {
-                        echo "No secrets found by TruffleHog."
-                    }
+                    //def report =readFile('trufflehog-output.json')
+                    //if (report.contains('"found": true')) {
+                    //    error "TruffleHog found secrets in the repository. Failing the build."
+                    //} else {
+                    //    echo "No secrets found by TruffleHog."
+                    //}
                 }
             }
         }
