@@ -43,7 +43,7 @@ pipeline {
              steps {
                  script {
                      docker.image('bridgecrew/checkov:latest').inside("--entrypoint=''") {
-                        sh 'checkov -d . --use-enforcement-rules --output-file-path checkov_report.json --output json'
+                        sh 'checkov -d . '
                      }
                  }
              }
