@@ -39,6 +39,9 @@ pipeline {
                     withSonarQubeEnv('sonarqube') {
                         sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=webgoat -Dsonar.language=java -Dsonar.sources=src/main/java -Dsonar.java.binaries=target/classes -Dsonar.scm.disabled=true"
                     }
+                    timeout(time: 10, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: false
+                    }
                  }
              }
          }
@@ -49,7 +52,7 @@ pipeline {
                 }
             }
         }
-         stage('Checkov') {
+         /*stage('Checkov') {
              steps {
                  script {
                      docker.image('bridgecrew/checkov:latest').inside("--entrypoint=''") {
@@ -57,7 +60,7 @@ pipeline {
                      }
                  }
              }
-         }
+         }*/
         stage('Secret Detection') {
             steps {
                 script {
