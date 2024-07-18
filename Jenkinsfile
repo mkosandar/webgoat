@@ -31,7 +31,17 @@ pipeline {
                     snykSecurity failOnIssues: false, snykInstallation: 'snyk', snykTokenId: 'snyk-token'
                 }
             }
-        } 
+        }
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'sonarqube-scanner';
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                 }
+             }
+         }
         stage("Checkmarx") {
             steps {
                 script{
