@@ -37,7 +37,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv('sonarqube') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=webgoat -Dsonar.language=java -Dsonar.sources=src/main/java -Dsonar.java.binaries=target/classes -Dsonar.scm.disabled=true""
                     }
                  }
              }
