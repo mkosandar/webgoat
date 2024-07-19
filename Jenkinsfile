@@ -28,8 +28,10 @@ pipeline {
         stage("detect-secret") {
             steps {
                 script{
-                    sh "detect-secrtes -version "
-                    sh " detect-secrets scan > .secrets.baseline "
+                    sh "pwd"
+                    sh "pip show detect-secrets"
+                    sh "whereis detect-secrtes "
+                    sh " detect-secrets scan "
                     //sh "detect-secrets scan > detect-secrets-report.json', returnStatus: true"
                     //def secretScan = sh(script: 'detect-secrets scan > detect-secrets-report.json', returnStatus: true)
                     //if (secretScan != 0) {
