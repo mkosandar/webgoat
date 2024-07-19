@@ -25,6 +25,13 @@ pipeline {
                 }
             }
         }
+        stage("detect-secret") {
+            steps {
+                script{
+                     detect-secrets scan > detect-secrets-report.json', returnStatus: true
+                }
+            }
+        }
         stage("snyk") {
             steps {
                 script{
