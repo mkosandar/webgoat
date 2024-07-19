@@ -25,12 +25,6 @@ pipeline {
                 }
             }
         }
-        stage('Install Detect Secret') {
-            steps {
-                // Install detect-secrets
-                sh 'pip install detect-secrets'
-            }
-        }
         stage("detect-secret") {
             steps {
                 script{
