@@ -31,7 +31,7 @@ pipeline {
                     //sh "pwd"
                     //sh "pip show detect-secrets"
                     //sh "whereis detect-secrtes "
-                    sh "/home/mk/.local/bin/detect-secrets scan"
+                    sh "/var/lib/jenkins/.local/bin/detect-secrets scan"
                     //sh " detect-secrets scan "
                     //sh "detect-secrets scan > detect-secrets-report.json', returnStatus: true"
                     //def secretScan = sh(script: 'detect-secrets scan > detect-secrets-report.json', returnStatus: true)
