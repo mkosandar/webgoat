@@ -28,7 +28,7 @@ pipeline {
         stage("detect-secret") {
             steps {
                 script{
-                    /sh "pwd"
+                    //sh "pwd"
                     //sh "pip show detect-secrets"
                     //sh "whereis detect-secrtes "
                     sh "/home/mk/.local/bin/detect-secrets scan"
