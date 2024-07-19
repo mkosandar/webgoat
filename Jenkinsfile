@@ -28,7 +28,8 @@ pipeline {
         stage("detect-secret") {
             steps {
                 script{
-                    sh "detect-secrets scan > detect-secrets-report.json', returnStatus: true"
+                    sh " detect-secrets scan > .secrets.baseline"
+                    //sh "detect-secrets scan > detect-secrets-report.json', returnStatus: true"
                     //def secretScan = sh(script: 'detect-secrets scan > detect-secrets-report.json', returnStatus: true)
                     //if (secretScan != 0) {
                     //    error("Secrets detected in the codebase!")
