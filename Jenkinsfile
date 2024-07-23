@@ -29,8 +29,8 @@ pipeline {
             steps {
                 script{
                     //sh "/var/lib/jenkins/.local/bin/detect-secrets scan"
-                    sh "/var/lib/jenkins/.local/bin/detect-secrets scan > detect-secrets-report.json', returnStatus: true"
-                    def secretScan = sh(script: 'detect-secrets scan > detect-secrets-report.json', returnStatus: true)
+                    //sh "/var/lib/jenkins/.local/bin/detect-secrets scan > detect-secrets-report.json', returnStatus: true"
+                    def secretScan = sh(script: '/var/lib/jenkins/.local/bin/detect-secrets scan > detect-secrets-report.json', returnStatus: true)
                     if (secretScan != 0) {
                         error("Secrets detected in the codebase!")
                     } else {
