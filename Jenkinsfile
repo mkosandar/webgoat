@@ -28,18 +28,14 @@ pipeline {
         stage("detect-secret") {
             steps {
                 script{
-                    //sh "pwd"
-                    //sh "pip show detect-secrets"
-                    //sh "whereis detect-secrtes "
-                    sh "/var/lib/jenkins/.local/bin/detect-secrets scan"
-                    //sh " detect-secrets scan "
-                    //sh "detect-secrets scan > detect-secrets-report.json', returnStatus: true"
-                    //def secretScan = sh(script: 'detect-secrets scan > detect-secrets-report.json', returnStatus: true)
-                    //if (secretScan != 0) {
-                    //    error("Secrets detected in the codebase!")
-                    //} else {
-                    //    echo "No secrets detected."
-                    //}
+                    //sh "/var/lib/jenkins/.local/bin/detect-secrets scan"
+                    sh "/var/lib/jenkins/.local/bin/detect-secrets scan > detect-secrets-report.json', returnStatus: true"
+                    def secretScan = sh(script: 'detect-secrets scan > detect-secrets-report.json', returnStatus: true)
+                    if (secretScan != 0) {
+                        error("Secrets detected in the codebase!")
+                    } else {
+                        echo "No secrets detected."
+                    }
                 }
             }
         }
@@ -91,7 +87,7 @@ pipeline {
                 }
             }
         }
-        stage("docker-publish") {
+        /*stage("docker-publish") {
             steps {
                 script{
                     sh """
@@ -101,7 +97,7 @@ pipeline {
                     """
                 }
             }
-        }
+        }*/
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
                 dependencyCheck additionalArguments: ''' 
