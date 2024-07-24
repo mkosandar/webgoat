@@ -26,7 +26,7 @@ pipeline {
                 }
             }
         }
-        stage("detect-secret") {
+        /*stage("detect-secret") {
             steps {
                 script{
                     //sh "/var/lib/jenkins/.local/bin/detect-secrets scan --update .secrets.baseline"
@@ -39,7 +39,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         stage("snyk") {
             steps {
                 script{
@@ -77,8 +77,8 @@ pipeline {
         stage('Secret Detection') {
             steps {
                 script {
-                    //sh "trufflehog git https://github.com/mkosandar/webgoat.git --json --no-update --fial "
-                    sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
+                    sh "trufflehog git https://github.com/mkosandar/webgoat.git --json --no-update --fial "
+                    //sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
                     //def report =readFile('trufflehog-output.json')
                     //if (report.contains('"found": true')) {
                     //    error "TruffleHog found secrets in the repository. Failing the build."
