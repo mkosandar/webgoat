@@ -29,7 +29,7 @@ pipeline {
         stage("detect-secret") {
             steps {
                 script{
-                    sh "/var/lib/jenkins/.local/bin/detect-secrets scan --update .secrets.baseline"
+                    //sh "/var/lib/jenkins/.local/bin/detect-secrets scan --update .secrets.baseline"
                     def secretScan = sh(script: '/var/lib/jenkins/.local/bin/detect-secrets scan > detect-secrets-report.json')
                     if (secretScan != 0) {
                         error("Secrets detected in the codebase!")
