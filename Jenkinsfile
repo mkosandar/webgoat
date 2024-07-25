@@ -77,7 +77,7 @@ pipeline {
         stage('Secret Detection') {
             steps {
                 script {
-                    sh "trufflehog git https://github.com/mkosandar/webgoat.git --json --no-update --fial "
+                    sh "trufflehog git https://github.com/mkosandar/webgoat.git --no-update "
                     //sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
                     //def report =readFile('trufflehog-output.json')
                     //if (report.contains('"found": true')) {
