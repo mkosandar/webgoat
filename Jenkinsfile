@@ -47,7 +47,7 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube analysis') {
+        /*stage('SonarQube analysis') {
             steps {
                 script {
                     def scannerHome = tool 'sonarqube-scanner';
@@ -65,7 +65,7 @@ pipeline {
                 }
             }
         }
-         /*stage('Checkov') {
+         stage('Checkov') {
              steps {
                  script {
                      docker.image('bridgecrew/checkov:latest').inside("--entrypoint=''") {
@@ -77,14 +77,14 @@ pipeline {
         stage('Secret Detection') {
             steps {
                 script {
-                    sh "trufflehog git https://github.com/mkosandar/webgoat.git --no-update "
-                    //sh " docker run --rm hysnsec/trufflehog git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
-                    //def report =readFile('trufflehog-output.json')
-                    //if (report.contains('"found": true')) {
-                    //    error "TruffleHog found secrets in the repository. Failing the build."
-                    //} else {
-                    //    echo "No secrets found by TruffleHog."
-                    //}
+                    //sh "trufflehog git https://github.com/mkosandar/webgoat.git --no-update "
+                    sh " docker run --rm trufflesecurity/trufflehog:latest git https://github.com/mkosandar/webgoat.git --json |tee trufflehog-output.json"
+                    def report =readFile('trufflehog-output.json')
+                    if (report.contains('"found": true')) {
+                        error "TruffleHog found secrets in the repository. Failing the build."
+                    } else {
+                        echo "No secrets found by TruffleHog."
+                    }
                 }
             }
         }
